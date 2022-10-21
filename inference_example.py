@@ -21,15 +21,16 @@ forecast_window = 48 # supposing you're forecasting 48 hours ahead
 
 enc_seq_len = 168 # supposing you want the model to base its forecasts on the previous 7 days of data
 
-optimizer = torch.optim.Adam()
+optimizer = torch.optim.Adam(model.parameters())
 
 criterion = torch.nn.MSELoss()
+
 
 # Iterate over all epochs
 for epoch in range(epochs):
 
     # Iterate over all (x,y) pairs in training dataloader
-    for i, (src, tgt, tgt_y) in enumerate(training_dataloader):
+    for i, (src, tgt, tgt_y) in enumerate(training_data):
 
         # zero the parameter gradients
         optimizer.zero_grad()

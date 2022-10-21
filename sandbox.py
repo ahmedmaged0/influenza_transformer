@@ -20,7 +20,7 @@ import numpy as np
 
 # Hyperparams
 test_size = 0.1
-batch_size = 128
+batch_size = 48
 target_col_name = "FCR_N_PriceEUR"
 timestamp_col = "timestamp"
 # Only use data from this date and onwards
@@ -29,10 +29,10 @@ cutoff_date = datetime.datetime(2017, 1, 1)
 ## Params
 dim_val = 512
 n_heads = 8
-n_decoder_layers = 4
-n_encoder_layers = 4
-dec_seq_len = 92 # length of input given to decoder
-enc_seq_len = 153 # length of input given to encoder
+n_decoder_layers = 2
+n_encoder_layers = 2
+dec_seq_len = 20 # length of input given to decoder
+enc_seq_len = 30 # length of input given to encoder
 output_sequence_length = 48 # target sequence length. If hourly data and length = 48, you predict 2 days ahead
 window_size = enc_seq_len + output_sequence_length # used to slice data into sub-sequences
 step_size = 1 # Step size, i.e. how many time steps does the moving window move at each step
@@ -86,7 +86,7 @@ if batch_first == False:
 
     shape_before = trg.shape
     trg = trg.permute(1, 0, 2)
-    print("src shape changed from {} to {}".format(shape_before, src.shape))
+    print("trg shape changed from {} to {}".format(shape_before, trg.shape))
 
 model = tst.TimeSeriesTransformer(
     input_size=len(input_variables),
